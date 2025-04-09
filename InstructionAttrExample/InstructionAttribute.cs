@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace InstructionAttrExample
 {
     internal enum MODIFIERS { TRIM, TOUPPER, TOLOWER}
-    //[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    //[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]//, Inherited =false)]
     internal class InstructionAttribute : Attribute
     {
         public MODIFIERS[] INSTRUCTIONS;

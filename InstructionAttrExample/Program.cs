@@ -44,10 +44,16 @@ namespace InstructionAttrExample
                 foreach (DataColumn column in dt.Columns)
                 {
                     string valueToSave = row[column.ColumnName].ToString();
-                    var potentialProp = props[column.ColumnName].GetCustomAttribute(typeof(InstructionAttribute));
-                    if (potentialProp != null)
+
+                    //this is a big improvement but still a slowdown:
+                    //var potentialProp = props[column.ColumnName].GetCustomAttribute(typeof(InstructionAttribute));
+                    //if (potentialProp != null)
+
+                    //original:
+                    if (Attribute.IsDefined(props[column.ColumnName], typeof(InstructionAttribute)))
                     {
-                        var attr = (InstructionAttribute)potentialProp;
+                        var attr = props[column.ColumnName].GetCustomAttribute<InstructionAttribute>();
+                        //var attr = (InstructionAttribute)potentialProp;
                         if(attr.INSTRUCTIONS.Contains(MODIFIERS.TRIM))
                             valueToSave = valueToSave.Trim();
                         if (attr.INSTRUCTIONS.Contains(MODIFIERS.TOUPPER))
